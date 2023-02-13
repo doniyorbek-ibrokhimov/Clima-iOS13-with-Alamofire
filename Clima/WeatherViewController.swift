@@ -2,21 +2,18 @@
 //  ViewController.swift
 //  Clima
 //
-//  Created by Angela Yu on 01/09/2019.
-//  Copyright © 2019 App Brewery. All rights reserved.
-//
 
 import UIKit
 import CoreLocation
 import Alamofire
 import SwiftyJSON
 
+//MARK: - WeatherDataModel
 class WeatherDataModel {
     var temperature: Int = 0
     var condition: Int = 0
     var city : String = ""
     var weatherIconName : String = ""
-    
     
     func updateWeatherIcon(condition: Int) -> String {
         
@@ -70,11 +67,11 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var changeCityTextField: UITextField!
     
-    
-    
+    // MARK: - Credentions
     let WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather"
     let APP_ID = "4fe76d6d3ca3d145536320183e9e51a0"
     
+    //MARK: - Instances
     let locationManager = CLLocationManager()
     let weatherDataModel = WeatherDataModel()
     
@@ -98,12 +95,16 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     
     //MARK: - JSON Parsing
     func updateWeatherData(json: JSON) {
+        
+        // main.temp
         if let tempResult = json["main"]["temp"].double {
             
             weatherDataModel.temperature = Int(tempResult - 273.15)
             
+            // name
             weatherDataModel.city = json["name"].stringValue
             
+            // weather[0].id
             weatherDataModel.condition = json["weather"][0]["id"].intValue
             
             weatherDataModel.weatherIconName = weatherDataModel.updateWeatherIcon(condition: weatherDataModel.condition)
@@ -116,7 +117,6 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     //MARK: - NETWORKING
-    
     func getWeatherData(url: String, parameters: [String : String]) {
         AF.request(url, method: .get, parameters: parameters).responseJSON { response in
             
@@ -136,7 +136,9 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     
     // MARK: - Location Manager
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
         let location = locations[locations.count-1]
+        
         if location.horizontalAccuracy > 0 {
             locationManager.stopUpdatingLocation()
             locationManager.delegate = nil

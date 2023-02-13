@@ -11,6 +11,57 @@ import CoreLocation
 import Alamofire
 import SwiftyJSON
 
+class WeatherDataModel {
+    var temperature: Int = 0
+    var condition: Int = 0
+    var city : String = ""
+    var weatherIconName : String = ""
+    
+    
+    func updateWeatherIcon(condition: Int) -> String {
+        
+    switch (condition) {
+    
+        case 0...300 :
+            return "tropicalstorm"
+        
+        case 301...500 :
+            return "cloud.rain"
+        
+        case 501...600 :
+            return "cloud.heavyrain.fill"
+        
+        case 601...700 :
+            return "snowflake"
+        
+        case 701...771 :
+            return "cloud.fog"
+        
+        case 772...799 :
+            return "tropicalstorm.circle.fill"
+        
+        case 800 :
+            return "sun.min"
+        
+        case 801...804 :
+            return "cloud"
+        
+        case 900...903, 905...1000  :
+            return "tropicalstorm.circle"
+        
+        case 903 :
+            return "cloud.snow"
+        
+        case 904 :
+            return "sun.max"
+        
+        default :
+            return "dunno"
+        }
+
+    }
+}
+
 class WeatherViewController: UIViewController, CLLocationManagerDelegate {
 
     @IBOutlet weak var weatherIcon: UIImageView!
@@ -42,7 +93,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     func updateUIWithWeatherData() {
         cityLabel.text = weatherDataModel.city
         temperatureLabel.text = "\(weatherDataModel.temperature)"
-        weatherIcon.image = UIImage(named: weatherDataModel.weatherIconName)
+        weatherIcon.image = UIImage(systemName: weatherDataModel.weatherIconName)
     }
     
     //MARK: - JSON Parsing
@@ -83,6 +134,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    // MARK: - Location Manager
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations[locations.count-1]
         if location.horizontalAccuracy > 0 {
@@ -105,8 +157,8 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         cityLabel.text = "Location unavailable"
     }
     
-
-    @IBAction func getWeatherPressed(_ sender: UIButton) {
+    
+    @IBAction func searchButtonPressed(_ sender: UIButton) {
         let cityName = changeCityTextField.text!
         let params : [String : String] = ["q" : cityName, "appid" : APP_ID]
         

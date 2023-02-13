@@ -50,7 +50,7 @@
                                                 <color key="tintColor" systemColor="labelColor"/>
                                                 <state key="normal" backgroundImage="magnifyingglass" catalog="system"/>
                                                 <connections>
-                                                    <action selector="getWeatherPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9GF-dk-f78"/>
+                                                    <action selector="searchButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fDy-di-DKT"/>
                                                 </connections>
                                             </button>
                                         </subviews>

@@ -9,6 +9,7 @@ import Alamofire
 import SwiftyJSON
 
 //MARK: - WeatherDataModel
+// Step 5
 class WeatherDataModel {
     var temperature: Int = 0
     var condition: Int = 0
@@ -78,7 +79,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
+        // Step 1
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
         
@@ -92,11 +93,13 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
 
     
     //MARK: - JSON Parsing
+    // Step 6
     func updateWeatherData(json: JSON) {
         
         // main.temp
         if let tempResult = json["main"]["temp"].double {
             
+            // from kelvin to celcius
             weatherDataModel.temperature = Int(tempResult - 273.15)
             
             // name
@@ -115,8 +118,9 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     //MARK: - NETWORKING
+    // Step 4
     func getWeatherData(url: String, parameters: [String : String]) {
-        
+ 
         AF.request(url, method: .get, parameters: parameters).responseJSON { response in
             
             if response.result.isSuccess {
@@ -135,16 +139,21 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     // MARK: - Location Manager
+    
+    // Step 2
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         // show telegram location as an example
         let location = locations[locations.count-1]
         
+//        print("Horizontal Accuracy: \(location.horizontalAccuracy)")
+        
         if location.horizontalAccuracy > 0 {
             locationManager.stopUpdatingLocation()
+            //            print("long = \(location.coordinate.longitude) lat = \(location.coordinate.latitude)")
             locationManager.delegate = nil
             
-//            print("long = \(location.coordinate.longitude) lat = \(location.coordinate.latitude)")
+
             
             let latitude = String(location.coordinate.latitude)
             let longtitude = String(location.coordinate.longitude)
@@ -155,18 +164,21 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    // Step 3
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
         cityLabel.text = "Location unavailable"
     }
     
     //MARK: - UI Updates
+    // Step 7
     func updateUIWithWeatherData() {
         cityLabel.text = weatherDataModel.city
         temperatureLabel.text = "\(weatherDataModel.temperature)"
         weatherIcon.image = UIImage(systemName: weatherDataModel.weatherIconName)
     }
     
+    // Step 8
     @IBAction func searchButtonPressed(_ sender: UIButton) {
         let cityName = changeCityTextField.text!
         let params : [String : String] = ["q" : cityName, "appid" : APP_ID]

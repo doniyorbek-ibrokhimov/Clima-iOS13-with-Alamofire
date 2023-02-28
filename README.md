@@ -1,54 +1,44 @@
+# Clima-iOS13-with-Alamofire
 
-![App Brewery Banner](Documentation/AppBreweryBanner.png)
+Clima-iOS13-with-Alamofire is an iOS weather app that uses the OpenWeatherMap API to display the current weather for a user's location and for other cities around the world. The app uses Alamofire to make API requests and SwiftyJSON to parse the JSON response.
 
-#  Clima
+## Features
 
-## Our Goal
+Clima-iOS13-with-Alamofire has the following features:
 
-It’s time to take our app development skills to the next level. We’re going to introduce you to the wonderful world of Application Programming Interfaces (APIs) to grab live data from the internet. If you’re dreaming of making that Twitter-powered stock trading app then you’re about add some serious tools to your toolbelt!
+- Displays the current weather for a user's location and for other cities around the world.
+- Allows the user to search for a specific city and see its current weather.
+- Displays the temperature, weather condition, and wind speed for each city.
+- Displays an icon representing the current weather condition.
 
+## Installation
 
-## What you will create
+To install Clima-iOS13-with-Alamofire, follow these steps:
 
-By the end of the module, you will have made a beautiful, dark-mode enabled weather app. You'll be able to check the weather for the current location based on the GPS data from the iPhone as well as by searching for a city manually. 
+1. Clone this repository to your local machine using `git clone https://github.com/LanceloT7730/Clima-iOS13-with-Alamofire.git`
+2. Open the project in Xcode 12 or later.
+3. Build and run the app on your device or simulator.
 
-## What you will learn
+## Usage
 
-* How to create a dark-mode enabled app.
-* How to use vector images as image assets.
-* Learn to use the UITextField to get user input. 
-* Learn about the delegate pattern.
-* Swift protocols and extensions. 
-* Swift guard keyword. 
-* Swift computed properties.
-* Swift closures and completion handlers.
-* Learn to use URLSession to network and make HTTP requests.
-* Parse JSON with the native Encodable and Decodable protocols. 
-* Learn to use Grand Central Dispatch to fetch the main thread.
-* Learn to use Core Location to get the current location from the phone GPS. 
+To use Clima-iOS13-with-Alamofire, follow these steps:
 
-### Condition Codes
-```
-switch conditionID {
-        case 200...232:
-            return "cloud.bolt"
-        case 300...321:
-            return "cloud.drizzle"
-        case 500...531:
-            return "cloud.rain"
-        case 600...622:
-            return "cloud.snow"
-        case 701...781:
-            return "cloud.fog"
-        case 800:
-            return "sun.max"
-        case 801...804:
-            return "cloud.bolt"
-        default:
-            return "cloud"
-        }
-```
+1. Open the app on your device.
+2. The app will ask for permission to use your location. Allow the app to use your location.
+3. The app will display the current weather for your location.
+4. To search for a specific city, tap the search icon and enter the name of the city.
+5. The app will display the current weather for the city you searched for.
 
->This is a companion project to The App Brewery's Complete App Development Bootcamp, check out the full course at [www.appbrewery.co](https://www.appbrewery.co/)
+## Contributing
 
-![End Banner](Documentation/readme-end-banner.png)
+If you'd like to contribute to Clima-iOS13-with-Alamofire, follow these steps:
+
+1. Fork this repository.
+2. Create a new branch: `git checkout -b my-new-branch`.
+3. Make your changes and commit them: `git commit -m 'Add some feature'`.
+4. Push to the branch: `git push origin my-new-branch`.
+5. Submit a pull request.
+
+## License
+
+Clima-iOS13-with-Alamofire is released under the MIT License. See `LICENSE` for details.
